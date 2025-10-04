@@ -26,17 +26,17 @@ class Counter extends React.Component {
             "div", // parent element
             { style: { textAlign: "center", marginTop: "20px" } }, // props for <div>
             // Child 1: display the current count
-            React.createElement("h1", { "data-testid": "counter-value" }, this.state.count),
+            React.createElement("h1", { "data-testid": "counter-value", "id" : "counter-value" }, this.state.count),
             // Child 2: decrement button
             React.createElement(
                 "button",
-                { onClick: this.whenDecrementButtonIsClicked, style: { marginRight: "10px" } },
+                { onClick: this.whenDecrementButtonIsClicked, style: { marginRight: "10px" }, "id" : "decrement-btn"},
                 "Decrement"
             ),
             // Child 3: increment button
             React.createElement(
                 "button",
-                { onClick: this.whenIcrementButtonIsClicked },
+                { onClick: this.whenIcrementButtonIsClicked, "id" : "increment-btn" },
                 "Increment"
             )
         );
