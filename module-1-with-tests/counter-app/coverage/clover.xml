@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1759349651146" clover="3.2.0">
+  <project timestamp="1759349651146" name="All files">
+    <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4" elements="11" coveredelements="11" complexity="0" loc="7" ncloc="7" packages="1" files="1" classes="1"/>
+    <file name="Counter.jsx" path="C:\Users\Pravallika_Kothamasu\OneDrive - EPAM\ReactJs-Global-Program\ReactJS-Global-Program\counter-app\src\Counter.jsx">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <line num="6" count="5" type="stmt"/>
+      <line num="8" count="5" type="stmt"/>
+      <line num="12" count="5" type="stmt"/>
+      <line num="13" count="5" type="stmt"/>
+      <line num="17" count="3" type="stmt"/>
+      <line num="21" count="2" type="stmt"/>
+      <line num="25" count="10" type="stmt"/>
+    </file>
+  </project>
+</coverage>
