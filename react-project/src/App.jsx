@@ -4,6 +4,7 @@ import GenreSelect from "./genreSelect/GenreSelect.jsx";
 import Counter from "./counter/Counter.jsx";
 import SearchForm from "./searchForm/SearchForm.jsx";
 import Header from "./header/Header.jsx";
+import Footer from "./footer/Footer.jsx";
 
 class App extends React.Component {
 
@@ -28,6 +29,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header />
+                <Footer />
                 {/**
                 <h1> Counter </h1>
                 <Counter initialValue={0} />
