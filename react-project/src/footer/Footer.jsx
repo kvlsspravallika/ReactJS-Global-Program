@@ -1,16 +1,16 @@
 import React from "react";
-import "./Footer.css"; // Custom styles
+import "./Footer.css";
 
-const Footer = () => {
+function Footer() {
+
     return (
-        <footer className="footer bg-dark text-white py-4">
-                <div className="footer-brand">
-                    <span className="brand-bold">netflix</span>
-                    <span className="brand-normal">roulette</span>
-                </div>
-
+        <footer className="footer bg-dark text-white py-4 text-center">
+            <div className="footer-brand">
+                <span className="brand-bold">netflix</span>
+                <span className="brand-normal">roulette</span>
+            </div>
         </footer>
     );
-};
+}
 
 export default Footer;

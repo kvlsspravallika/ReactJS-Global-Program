@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./MovieFilterControls.css";
 import SortControl from "./SortControl.jsx";
 
@@ -6,6 +6,13 @@ function MovieFilterControls({ genres, selectedGenre, onGenreSelect}) {
     // Instead of binding methods, we define inline arrow functions.
     const handleClick = (genre) => {
         onGenreSelect(genre);
+    };
+
+    const [sortBy, setSortBy] = useState("releaseDate");
+
+    const handleSortChange = (newSort) => {
+        console.log("Sorting by:", newSort);
+        setSortBy(newSort);
     };
 
     return (
@@ -30,7 +37,10 @@ function MovieFilterControls({ genres, selectedGenre, onGenreSelect}) {
                 </div>
                 <div className="left-div d-flex">
                     <span className="navbar-brand">SORT BY</span>
-                    <SortControl/>
+                    <SortControl
+                        currentSelection={sortBy}
+                        onSortChange={handleSortChange}
+                    />
                 </div>
             </div>
         </nav>
