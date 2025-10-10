@@ -1,53 +1,52 @@
-import './App.css'
-import React from "react";
-import GenreSelect from "./genreSelect/GenreSelect.jsx";
-import Counter from "./counter/Counter.jsx";
-import SearchForm from "./searchForm/SearchForm.jsx";
+import "./App.css";
+import React, { useState } from "react";
 import Header from "./header/Header.jsx";
 import Footer from "./footer/Footer.jsx";
+import MovieFilterControls from "./filter-bar/MovieFilterControls.jsx";
 
-class App extends React.Component {
+function App() {
+    // State managed with Hooks
+    const [genres] = useState(["All", "Documentary", "Comedy", "Horror", "Crime"]);
+    const [selectedGenre, setSelectedGenre] = useState("All");
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            genres : ["All", "Action", "Horror", "Comedy", "Drama"],
-            selectedGenre : "All"
-        };
-
-        this.handleGenreSelect = this.handleGenreSelect.bind(this);
-    }
-
-
-    handleGenreSelect(genre) {
+    // Event handler
+    const handleGenreSelect = (genre) => {
         console.log("Selected Genre:", genre);
-        this.setState({ selectedGenre: genre });
-    }
+        setSelectedGenre(genre);
+    };
 
-    render() {
-        return (
-            <div>
-                <Header />
-                <Footer />
-                {/**
-                <h1> Counter </h1>
-                <Counter initialValue={0} />
-                <h1>Movie Genres</h1>
-                <GenreSelect
-                    genres={this.state.genres}
-                    selectedGenre={this.state.selectedGenre}
-                    onSelect={this.handleGenreSelect}
-                />
-                <h1>Search Form </h1>
-                <SearchForm initialQuery="" onSearch={(query) => {
-                    console.log("Searching for:", query);
-                    // You can add API calls here
-                }} />
-            */}
-            </div>
-        );
-    }
+    return (
+        <div>
+            <Header />
+            <MovieFilterControls
+                genres={genres}
+                selectedGenre={selectedGenre}
+                onGenreSelect={handleGenreSelect}
+            />
+            <Footer />
+
+            {/*
+      <h1>Counter</h1>
+      <Counter initialValue={0} />
+
+      <h1>Movie Genres</h1>
+      <GenreSelect
+        genres={genres}
+        selectedGenre={selectedGenre}
+        onSelect={handleGenreSelect}
+      />
+
+      <h1>Search Form</h1>
+      <SearchForm
+        initialQuery=""
+        onSearch={(query) => {
+          console.log("Searching for:", query);
+          // You can add API calls here
+        }}
+      />
+      */}
+        </div>
+    );
 }
 
-export default App
+export default App;
