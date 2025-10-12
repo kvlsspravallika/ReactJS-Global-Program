@@ -26,3 +26,7 @@
 .movie-tile-header {
     height: 900px;
 }
+
+#home-button:hover{
+    cursor: pointer;
+}

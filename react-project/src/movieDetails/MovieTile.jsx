@@ -9,7 +9,7 @@ function MovieTile({selectedMovie, setShowHeaderToTrue}) {
     return (
         <header className="header d-flex flex-column justify-content-center align-items-center text-white movie-tile-header"
         >
-            <div className="brand" onClick={handleHomeClick}>
+            <div className="brand" onClick={handleHomeClick} id="home-button">
                 <p>
                     <span className="brand-bold">netflix</span>
                     <span className="brand-normal">roulette</span>
