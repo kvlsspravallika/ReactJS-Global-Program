@@ -38,3 +38,7 @@
     text-decoration: none;
     white-space: nowrap;
 }
+
+#movie-control-background {
+    background-color: dimgrey;
+}

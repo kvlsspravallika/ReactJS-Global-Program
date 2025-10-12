@@ -16,7 +16,7 @@ function MovieFilterControls({ genres, selectedGenre, onGenreSelect}) {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="movie-control-background">
             <div className="d-flex justify-content-between align-items-center menu-container w-100 p-0">
                 {/* Left section: Genre buttons */}
                 <div className="left-div d-flex gap-2">

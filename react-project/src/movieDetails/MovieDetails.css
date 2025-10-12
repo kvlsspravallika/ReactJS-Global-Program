@@ -1,0 +1,13 @@
+#movie-image-in-list {
+    width: 500px;
+    height: 500px;
+    border: 2px solid #008ACE;
+}
+
+#movie-list-container{
+    margin-top: 40px;
+}
+
+#movie-tile-header {
+    background-image: none;
+}
