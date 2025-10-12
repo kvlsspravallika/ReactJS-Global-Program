@@ -11,6 +11,7 @@ function App() {
     const [genres] = useState(["All", "Documentary", "Comedy", "Horror", "Crime"]);
     const [selectedGenre, setSelectedGenre] = useState("All");
     const [showHeader, setShowHeader] = useState(true);
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     // Event handler
     const handleGenreSelect = (genre) => {
@@ -21,11 +22,14 @@ function App() {
     const handleShowSelectedMovieTile = (movie) => {
         console.log("Selected Movie:", movie);
         setShowHeader(false);
+        setSelectedMovie(movie);
     }
 
     return (
         <div>
-            {showHeader ? <Header /> : <MovieTile />}
+            {showHeader ? <Header /> :
+                <MovieTile selectedMovie={selectedMovie}
+                           setShowHeaderToTrue={() => setShowHeader(true)}/>}
             <MovieFilterControls
                 genres={genres}
                 selectedGenre={selectedGenre}

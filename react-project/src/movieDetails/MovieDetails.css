@@ -11,3 +11,18 @@
 #movie-tile-header {
     background-image: none;
 }
+
+#movie-title-card {
+    /*background-color: dimgrey;*/
+    height: 400px;
+    width: 90vw;
+}
+
+#movie-image-tile {
+    width: 400px;
+    height: 350px;
+}
+
+.movie-tile-header {
+    height: 900px;
+}
