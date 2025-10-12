@@ -16,29 +16,44 @@ function MovieTile({selectedMovie, setShowHeaderToTrue}) {
                 </p>
             </div>
 
-            <div className="col-sm-6 col-md-6 col-xs-6">
 
-                <div className="row" >
-                    <div className="col-xs-6">
-                        <img id="movie-image-tile" src={selectedMovie.poster_path} />
-                    </div>
-                    <div className="col-xs-6">
-                        <h3>Hello World</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi
-                            felis vehicula justo, a dapibus quam augue non massa.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi
-                            felis vehicula justo, a dapibus quam augue non massa.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi
-                            felis vehicula justo, a dapibus quam augue non massa.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi
-                            felis vehicula justo, a dapibus quam augue non massa.</p>
+
+            <div className="container-fluid bg-dark text-light py-5" id = "movie-image-tile">
+                <div className="container">
+                    <div className="row align-items-center">
+                        {/* LEFT: Poster */}
+                        <div className="col-md-4 text-center">
+                            <img
+                                src={selectedMovie.poster_path}
+                                alt={selectedMovie.title}
+                                className="img-fluid rounded shadow"
+                                style={{ maxHeight: "500px", objectFit: "cover" }}
+                            />
+                        </div>
+
+                        {/* RIGHT: Movie details */}
+                        <div className="col-md-8" >
+                            <div className="d-flex align-items-center justify-content-between mb-3">
+                                <h1 className="display-5 mb-0">{selectedMovie.title}</h1>
+                                <div className="border border-light rounded-circle px-3 py-2">
+                                    <strong>{selectedMovie.vote_average}</strong>
+                                </div>
+                            </div>
+
+                            <p className="text-secondary mb-2">
+                                {selectedMovie.genres?.join(", ") || "Action & Adventure"}
+                            </p>
+
+                            <p className="text-danger fw-bold mb-4">
+                                {selectedMovie.release_date?.split("-")[0]} &nbsp; | &nbsp; {selectedMovie.runtime}
+                            </p>
+
+                            <p className="lead" style={{ lineHeight: "1.6" }}>
+                                {selectedMovie.overview}
+                            </p>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </header>
     );

@@ -19,8 +19,8 @@
 }
 
 #movie-image-tile {
-    width: 400px;
-    height: 350px;
+    width: 80vw;
+    height: 600px;
 }
 
 .movie-tile-header {
