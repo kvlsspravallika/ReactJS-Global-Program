@@ -1,0 +1,32 @@
+#movie-image-in-list {
+    width: 500px;
+    height: 500px;
+    border: 2px solid #008ACE;
+}
+
+#movie-list-container{
+    margin-top: 40px;
+}
+
+#movie-tile-header {
+    background-image: none;
+}
+
+#movie-title-card {
+    /*background-color: dimgrey;*/
+    height: 400px;
+    width: 90vw;
+}
+
+#movie-image-tile {
+    width: 80vw;
+    height: 600px;
+}
+
+.movie-tile-header {
+    height: 900px;
+}
+
+#home-button:hover{
+    cursor: pointer;
+}
