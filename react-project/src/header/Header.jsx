@@ -1,31 +1,44 @@
 import React from "react";
 import "./Header.css";
 import SearchBar from "./SearchBar.jsx";
+import {createPortal} from "react-dom";
+import AddMovieModal from "../modal/AddMovieModal.jsx";
 
 function Header() {
+    const [showModal, setShowModal] = React.useState(false);
     const handleSearch = (query) => {
         console.log("Searching for:", query);
         // You can add API calls or navigation logic here
     };
 
     return (
-        <header className="header d-flex flex-column justify-content-center align-items-center text-white">
-            <div className="brand">
-                <p>
-                    <span className="brand-bold">netflix</span>
-                    <span className="brand-normal">roulette</span>
-                </p>
-            </div>
+        <div>
+            <header className="header d-flex flex-column justify-content-center align-items-center text-white">
+                <div className="brand">
+                    <p>
+                        <span className="brand-bold">netflix</span>
+                        <span className="brand-normal">roulette</span>
+                    </p>
+                </div>
 
-            <h1 className="find-your-movie">FIND YOUR MOVIE</h1>
+                <h1 className="find-your-movie">FIND YOUR MOVIE</h1>
 
-            <div className="header-content text-center search-bar">
-                <SearchBar
-                    intialQuery="What do you want to search?"
-                    onSearch={handleSearch}
-                />
-            </div>
-        </header>
+                <div className="header-content text-center search-bar" id="header-body">
+                    <SearchBar
+                        intialQuery="What do you want to search?"
+                        onSearch={handleSearch}
+                    />
+                </div>
+
+                <div className = "brand">
+                    <button onClick={() => setShowModal(true)}>+ ADD MOVIE</button>
+                    {showModal && createPortal(
+                        <AddMovieModal onClose={() => setShowModal(false)} />,
+                        document.getElementById("header-body")
+                    )}
+                </div>
+            </header>
+        </div>
     );
 }
 
