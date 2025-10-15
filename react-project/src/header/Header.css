@@ -45,6 +45,20 @@
 
 }
 
+.brand button {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    left: 1500px;
+    top: 74px;
+    padding: 10px;
+    font-family: 'Montserrat', 'Montserrat', system-ui;
+    font-weight: 200;
+    font-size: 25px;
+    color: white;
+    background-color: #F65261;
+}
+
 
 .brand-bold {
     font-weight: bold;     /* makes Netflix bold */
