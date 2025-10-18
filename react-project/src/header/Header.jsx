@@ -23,7 +23,7 @@ function Header() {
 
                 <h1 className="find-your-movie">FIND YOUR MOVIE</h1>
 
-                <div className="header-content text-center search-bar" id="header-body">
+                <div className="header-content text-center search-bar" id="add-movie-modal-placement">
                     <SearchBar
                         intialQuery="What do you want to search?"
                         onSearch={handleSearch}
@@ -34,7 +34,7 @@ function Header() {
                     <button onClick={() => setShowModal(true)}>+ ADD MOVIE</button>
                     {showModal && createPortal(
                         <AddMovieModal onClose={() => setShowModal(false)} />,
-                        document.getElementById("header-body")
+                        document.getElementById("add-movie-modal-placement")
                     )}
                 </div>
             </header>

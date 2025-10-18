@@ -3,14 +3,14 @@
     top: 0;
     left: 200px;
     width: 70%;
-    height: 650px;
-    margin: 100px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
+    height: auto;
+    min-height: 100vh;
+    margin: 50px 50px 100px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-color: black;
+    background: #555555;
+    border-radius: 10px;
+    overflow-y: auto;
 }
 
 .modal-content {
@@ -19,4 +19,51 @@
     border-radius: 8px;
     width: 400px;
     max-width: 90%;
+}
+#add-movie-header {
+   margin-top: 0; /* remove default h1 top margin */
+   margin-bottom: 30px;
+}
+.form-label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.3rem;
+}
+
+input{
+    height: 60px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.overview-section {
+    margin-bottom: 1rem;
+    height: auto;
+}
+textarea {
+    height: 150px;
+}
+
+.add-movie-buttons{
+    height: 4rem;
+    width: 10rem;
+    left: 31.76%;
+    right: 31.33%;
+    top: calc(50% - 24px/2 + 1.5px);
+
+    font-family: 'Montserrat', system-ui;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: white;
+    background-color: lightcoral;
 }
