@@ -1,5 +1,7 @@
 import './AddMovieModal.css'
-import {useState} from "react";
+import React, {useState} from "react";
+import {createPortal} from "react-dom";
+import MovieSuccessModal from "./MovieSuccessModal.jsx";
 function AddMovieModal({handleCloseModal}) {
 
     const [movieTitle, setMovieTitle] = useState('');
@@ -10,6 +12,7 @@ function AddMovieModal({handleCloseModal}) {
     const [overview, setOverview] = useState('');
     const [selectedGenres, setSelectedGenres] = useState([]);
     const urlToAddMovie = "http://localhost:4000/movies";
+    const [movieAddedSuccessfully, setMovieAddedSuccessfully] = useState(false);
 
     const handleGenreChange = (event) => {
         const selected = Array.from(event.target.selectedOptions, option => option.value)
@@ -48,6 +51,7 @@ function AddMovieModal({handleCloseModal}) {
         }).then(res => res.json())
         .then(data => {
             console.log('Success:', data);
+            setMovieAddedSuccessfully(true);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -55,7 +59,7 @@ function AddMovieModal({handleCloseModal}) {
     }
 
     return (
-        <div className="modal-overlay">
+        <div className="modal-overlay" id="add-movie-modal">
             <div className="modal-content">
                 <h1 id="add-movie-header"> ADD MOVIE </h1>
                 <form>
@@ -119,6 +123,10 @@ function AddMovieModal({handleCloseModal}) {
                 <div className="d-flex  modal-buttons">
                     <button onClick={handleReset} className="add-movie-buttons">RESET</button>
                     <button onClick={handleSubmit} className="add-movie-buttons" >SUBMIT</button>
+                    {movieAddedSuccessfully && createPortal(
+                    <MovieSuccessModal handleCloseModal={() => setMovieAddedSuccessfully(false)} />,
+                    document.getElementById("add-movie-modal")
+                    )}
                     <button onClick={handleCloseModal} className="add-movie-buttons" >CLOSE</button>
                 </div>
             </div>
