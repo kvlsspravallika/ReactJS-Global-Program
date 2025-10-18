@@ -33,7 +33,7 @@ function Header() {
                 <div className = "brand">
                     <button onClick={() => setShowModal(true)}>+ ADD MOVIE</button>
                     {showModal && createPortal(
-                        <AddMovieModal onClose={() => setShowModal(false)} />,
+                        <AddMovieModal handleCloseModal={() => setShowModal(false)} />,
                         document.getElementById("add-movie-modal-placement")
                     )}
                 </div>

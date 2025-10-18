@@ -67,3 +67,11 @@ textarea {
     color: white;
     background-color: lightcoral;
 }
+
+.modal-buttons {
+    display: flex;
+    justify-content: center; /* centers items horizontally */
+    align-items: center;     /* centers items vertically */
+    gap: 100px;               /* spacing between buttons */
+    margin-top: 30px;
+}

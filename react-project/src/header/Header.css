@@ -47,14 +47,14 @@
 
 .brand button {
     position: absolute;
-    width: 200px;
-    height: 60px;
-    left: 1500px;
+    width: 250px;
+    height: 100px;
+    left: 2000px;
     top: 74px;
     padding: 10px;
     font-family: 'Montserrat', 'Montserrat', system-ui;
     font-weight: 200;
-    font-size: 25px;
+    font-size: 30px;
     color: white;
     background-color: #F65261;
 }
