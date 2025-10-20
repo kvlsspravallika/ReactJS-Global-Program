@@ -1,0 +1,84 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+
+.modal-content {
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    width: 50%;           /* wider form */
+    max-width: 90vw;        /* responsive limit */
+    max-height: 70vh;
+    overflow-y: auto;       /* in case form gets tall */
+}
+
+#add-movie-header {
+    margin-top: 0; /* remove default h1 top margin */
+    margin-bottom: 30px;
+}
+.form-label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+    font-size: 1.3rem;
+
+}
+
+input{
+    height: 60px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-content .form-label {
+    color: black;
+}
+
+.overview-section {
+    margin-bottom: 1rem;
+    height: auto;
+}
+textarea {
+    height: 150px;
+}
+
+.add-movie-buttons{
+    height: 4rem;
+    width: 10rem;
+    left: 31.76%;
+    right: 31.33%;
+    top: calc(50% - 24px/2 + 1.5px);
+
+    font-family: 'Montserrat', system-ui;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: white;
+    background-color: lightcoral;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;              /* consistent spacing */
+    margin-top: 30px;
+}

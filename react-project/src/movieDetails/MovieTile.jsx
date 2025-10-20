@@ -1,13 +1,20 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './MovieTile.css'
+import {createPortal} from "react-dom";
+import EditMovieModal from "../modal/EditMovieModal.jsx";
+import MovieFilterControls from "../filter-bar/MovieFilterControls.jsx";
 
 function MovieTile({selectedMovie, setShowHeaderToTrue}) {
+
+    const[showEditMovieModal, setShowEditMovieModal] = React.useState(false);
 
     const handleHomeClick = () => {
         setShowHeaderToTrue();
     }
     return (
-        <header className="header d-flex flex-column justify-content-center align-items-center text-white movie-tile-header"
+        <header className="header d-flex flex-column justify-content-center
+        align-items-center text-white movie-tile-header" id="movie-tile-header"
         >
             <div className="brand" onClick={handleHomeClick} id="home-button">
                 <p>
@@ -51,6 +58,15 @@ function MovieTile({selectedMovie, setShowHeaderToTrue}) {
                             <p className="lead" style={{ lineHeight: "1.6" }}>
                                 {selectedMovie.overview}
                             </p>
+                            <button className="add-movie-buttons"
+                            onClick={() => setShowEditMovieModal(true)}>
+                                EDIT</button>
+                            {
+                                showEditMovieModal && createPortal(<EditMovieModal movieToEdit={selectedMovie}/>,
+                                    document.getElementById("portal-root")
+                                )
+                            }
+                            <button className="add-movie-buttons" >DELETE</button>
                         </div>
                     </div>
                 </div>
