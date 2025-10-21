@@ -1,6 +1,5 @@
 import React from "react";
 import './AddMovieModal.css';
-import { useNavigate } from 'react-router-dom';
 
 function DeleteMovieModal({ handleCloseModal, movieToDelete}) {
     const urlToDeleteMovie = "http://localhost:4000/movies";

@@ -6,7 +6,7 @@ import Header from '../header/Header';
 describe('Footer', () => {
   it('renders the footer', () => {
     render(<Footer />);
-    expect(screen.getByText(/copyright/i)).toBeInTheDocument();
+    expect(screen.getByText("netflix")).toBeInTheDocument();
   });
 });
 
