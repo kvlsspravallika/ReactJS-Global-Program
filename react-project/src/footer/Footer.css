@@ -1,0 +1,39 @@
+.footer {
+    background-color: #141414; /* dark background */
+    color: #fff;
+    font-family: 'Montserrat', 'Montserrat', system-ui;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);  /* Cancel container's centering */
+    margin-top: 0;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 24px;
+}
+.footer-brand {
+    margin: 1rem;
+}
+
+.footer-brand .brand-bold {
+    font-weight: bold;     /* makes Netflix bold */
+    color: indianred;
+}
+
+.footer-brand .brand-normal {
+    font-weight: normal;   /* makes roulette normal */
+    color: indianred;          /* or any color you want */
+    margin-left: 5px;
+}
+
+/* Responsive spacing */
+@media (max-width: 767px) {
+    .footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+}

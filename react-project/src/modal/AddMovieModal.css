@@ -1,0 +1,106 @@
+/* Dim background overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal box */
+.modal-content {
+    background: #232323;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 600px; /* controls overall width */
+    max-height: 90vh; /* prevents it from overflowing */
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Header */
+#add-movie-header {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Label spacing */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: black;
+}
+
+/* Buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.add-movie-buttons {
+    background-color: #f65261;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-movie-buttons:hover {
+    background-color: #ff7a85;
+}
+
+/* Overview textarea */
+#text-area {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Form control fixes */
+.form-control, .form-select {
+    background-color: #424242;
+    color: white;
+    border: none;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #555;
+    outline: none;
+    box-shadow: none;
+}
+
+.modal-content .form-label {
+    color: black;
+}
+
+.sr-only {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+}
+label {
+    display: inline-block; /* or block */
+    visibility: visible;
+    opacity: 1;
+    color: #000; /* make sure text color contrasts with background */
+    font-size: 16px;
+}
+h3{
+    padding-left: 300px;
+    padding-top: 50px;
+}
+
