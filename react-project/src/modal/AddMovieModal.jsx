@@ -105,6 +105,9 @@ function AddMovieModal({handleCloseModal}) {
                                 <option value="documentary">Documentary</option>
                                 <option value="horror">Horror</option>
                                 <option value="comedy">Comedy</option>
+                                <option value="comedy">Drama</option>
+                                <option value="comedy">Romance</option>
+
                             </select>
                         </div>
                         <div className="col-md-6">

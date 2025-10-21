@@ -62,7 +62,8 @@ function MovieTile({selectedMovie, setShowHeaderToTrue}) {
                             onClick={() => setShowEditMovieModal(true)}>
                                 EDIT</button>
                             {
-                                showEditMovieModal && createPortal(<EditMovieModal movieToEdit={selectedMovie}/>,
+                                showEditMovieModal && createPortal(<EditMovieModal movieToEdit={selectedMovie}
+                                                                                   handleCloseModal={() => setShowEditMovieModal(false)}/>,
                                     document.getElementById("portal-root")
                                 )
                             }
