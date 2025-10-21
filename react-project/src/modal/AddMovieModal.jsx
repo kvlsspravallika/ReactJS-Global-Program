@@ -2,15 +2,15 @@ import './AddMovieModal.css'
 import React, {useState} from "react";
 import {createPortal} from "react-dom";
 import MovieSuccessModal from "./MovieSuccessModal.jsx";
-function AddMovieModal({handleCloseModal}) {
+function AddMovieModal({handleCloseModal, initialValues = {}}) {
 
-    const [movieTitle, setMovieTitle] = useState('');
-    const [movieReleaseDate, setMovieReleaseDate] = useState('');
-    const [moviePosterPath, setMoviePosterPath] = useState('');
-    const [movieRating, setMovieRating] = useState('');
-    const [movieRunTime, setMovieRunTime] = useState('');
-    const [overview, setOverview] = useState('');
-    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [movieTitle, setMovieTitle] = useState(initialValues.title || '');
+    const [movieReleaseDate, setMovieReleaseDate] = useState(initialValues.release_date || '');
+    const [moviePosterPath, setMoviePosterPath] = useState(initialValues.poster_path || '');
+    const [movieRating, setMovieRating] = useState(initialValues.vote_average || '');
+    const [movieRunTime, setMovieRunTime] = useState(initialValues.runtime || '');
+    const [overview, setOverview] = useState(initialValues.overview || '');
+    const [selectedGenres, setSelectedGenres] = useState(initialValues.genres || []);
     const urlToAddMovie = "http://localhost:4000/movies";
     const [movieAddedSuccessfully, setMovieAddedSuccessfully] = useState(false);
 
