@@ -67,6 +67,7 @@ function EditMovieModal({ movieToEdit, handleCloseModal }) {
             const data = await res.json();
             console.log('Success:', data);
             setMovieUpdatedSuccessfully(true);
+            window.location.reload();
         } catch (error) {
             console.error('Error:', error);
         }

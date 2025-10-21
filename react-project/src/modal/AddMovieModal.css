@@ -99,4 +99,8 @@ label {
     color: #000; /* make sure text color contrasts with background */
     font-size: 16px;
 }
+h3{
+    padding-left: 300px;
+    padding-top: 50px;
+}
 

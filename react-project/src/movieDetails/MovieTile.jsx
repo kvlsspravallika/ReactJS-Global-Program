@@ -4,10 +4,12 @@ import './MovieTile.css'
 import {createPortal} from "react-dom";
 import EditMovieModal from "../modal/EditMovieModal.jsx";
 import MovieFilterControls from "../filter-bar/MovieFilterControls.jsx";
+import DeleteMovieModal from "../modal/DeleteMovieModal.jsx";
 
 function MovieTile({selectedMovie, setShowHeaderToTrue}) {
 
     const[showEditMovieModal, setShowEditMovieModal] = React.useState(false);
+    const[showDeleteMovieModal, setShowDeleteMovieModal] = React.useState(false);
 
     const handleHomeClick = () => {
         setShowHeaderToTrue();
@@ -67,7 +69,12 @@ function MovieTile({selectedMovie, setShowHeaderToTrue}) {
                                     document.getElementById("portal-root")
                                 )
                             }
-                            <button className="add-movie-buttons" >DELETE</button>
+                            <button className="add-movie-buttons"
+                            onClick={() => setShowDeleteMovieModal(true)}>DELETE</button>
+                            {showDeleteMovieModal && createPortal(
+                                <DeleteMovieModal movieToDelete={selectedMovie} handleCloseModal={() => setShowDeleteMovieModal(false)}/>,
+                                document.getElementById("portal-root")
+                            )}
                         </div>
                     </div>
                 </div>

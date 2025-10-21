@@ -52,6 +52,7 @@ function AddMovieModal({handleCloseModal}) {
         .then(data => {
             console.log('Success:', data);
             setMovieAddedSuccessfully(true);
+            window.location.reload();
         })
         .catch((error) => {
             console.error('Error:', error);

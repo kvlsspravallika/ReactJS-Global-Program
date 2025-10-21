@@ -6,7 +6,7 @@ function MovieList({showSelectedMovieDetails}) {
     const [movies, setMovies] = useState([]);
 
     const getMovies = async () => {
-        const response = await fetch(urlToFetchMovies);
+        const response = await fetch(urlToFetchMovies + "?sortBy=release_date&sortOrder=desc");
         const data = await response.json();
         setMovies(data.data); // adjust to your API structure
     };
