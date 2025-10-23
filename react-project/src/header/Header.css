@@ -1,0 +1,74 @@
+/* Header.css */
+
+
+.header {
+    position: relative;
+    height: 500px; /* Adjust height as desired */
+    background-image: url('./header.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    overflow: hidden;
+    width: 100vw;      /* Full viewport width */
+    margin-left: calc(-50vw + 50%);  /* Cancel container's centering */
+    margin-top: 0;
+}
+
+/* Overlay to darken the background for better contrast */
+.header .overlay {
+    position: absolute;
+    inset: 0; /* same as top:0; right:0; bottom:0; left:0 */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Content stays centered above overlay */
+.header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.brand p {
+    position: absolute;
+    width: 152px;
+    height: 24px;
+    left: 118px;
+    top: 74px;
+
+    font-family: 'Montserrat', 'Montserrat', system-ui;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 24px;
+
+    color: #F65261;
+
+}
+
+.brand button {
+    position: absolute;
+    width: 250px;
+    height: 100px;
+    left: 2000px;
+    top: 74px;
+    padding: 10px;
+    font-family: 'Montserrat', 'Montserrat', system-ui;
+    font-weight: 200;
+    font-size: 30px;
+    color: white;
+    background-color: #F65261;
+}
+
+
+.brand-bold {
+    font-weight: bold;     /* makes Netflix bold */
+    color: indianred;       /* Netflix red color */
+}
+
+.brand-normal {
+    font-weight: normal;   /* makes roulette normal */
+    color: indianred;          /* or any color you want */
+    margin-left: 5px;      /* small spacing between words */
+}
+
+
