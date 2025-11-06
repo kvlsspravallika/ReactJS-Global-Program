@@ -1,10 +1,12 @@
 import React from "react";
 import './AddMovieModal.css';
+import {useNavigate} from "react-router-dom";
 
 function DeleteMovieModal({ handleCloseModal, movieToDelete}) {
     const urlToDeleteMovie = "http://localhost:4000/movies";
     const [movieDeleteSuccessfully, setMovieDeleteSuccessfully] = React.useState(false);
     const id = movieToDelete.id;
+    const navigate = useNavigate();
 
     const handleConfirm = async () => {
         try {
@@ -16,6 +18,7 @@ function DeleteMovieModal({ handleCloseModal, movieToDelete}) {
             if (response.ok) {
                 console.log('Item deleted successfully');
                 setMovieDeleteSuccessfully(true);
+                navigate('/');
                 window.location.reload();
             } else {
                 console.error('Failed to delete item');

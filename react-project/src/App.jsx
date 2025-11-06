@@ -5,6 +5,13 @@ import Footer from "./footer/Footer.jsx";
 import MovieFilterControls from "./filter-bar/MovieFilterControls.jsx";
 import MovieList from "./movieDetails/MovieList.jsx";
 import MovieTile from "./movieDetails/MovieTile.jsx";
+import {Routes, Route} from 'react-router-dom';
+import MovieTileExample from "./movieDetails/MovieTileExample.jsx";
+import {createBrowserRouter, RouterProvider, createRoutesFromElements} from "react-router-dom";
+import RootLayout from "./layout/RootLayout.jsx";
+import SearchBar from "./Header/SearchBar.jsx";
+import { movieLoader } from "./Loaders/movieLoader.js";
+import EditMovieModal from "./modal/EditMovieModal.jsx";
 
 function App() {
     // State managed with Hooks
@@ -38,26 +45,15 @@ function App() {
         console.log("Sort by Criterion:", criterion);
     }
 
+    const router = createBrowserRouter(createRoutesFromElements(
+        <Route path='/' element={<RootLayout />}>
+            <Route index element={<Header handleSearchResult={searchByQuery}/>} />
+            <Route path='/:movieId' element={<MovieTile />} loader={movieLoader} />
+        </Route>
+
+        ))
     return (
-        <div>
-            {showHeader ? <Header handleSearchResult={searchByQuery}/> :
-                <MovieTile selectedMovie={selectedMovie}
-                           setShowHeaderToTrue={() => setShowHeader(true)}/>}
-            <MovieFilterControls
-                genres={genres}
-                selectedGenre={selectedGenre}
-                handleSortBy = {sortByCriterion}
-                onGenreSelect={handleGenreSelect}
-
-            />
-            <MovieList
-                searchQuery = {searchQuery}
-                filter = {selectedGenre == "All" ? "" : selectedGenre}
-                sortBy = {sortBy}
-                showSelectedMovieDetails = {handleShowSelectedMovieTile}/>
-            <Footer />
-
-        </div>
+        <RouterProvider router={router} />
     );
 }
 

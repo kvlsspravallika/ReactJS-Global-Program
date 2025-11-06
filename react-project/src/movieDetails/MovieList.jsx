@@ -1,5 +1,6 @@
 import "./MovieDetails.css";
 import { useEffect, useState } from "react";
+import {Link, NavLink} from "react-router-dom";
 
 function MovieList({searchQuery, filter, sortBy,showSelectedMovieDetails}) {
     const urlToFetchMovies = "http://localhost:4000/movies";
@@ -7,6 +8,7 @@ function MovieList({searchQuery, filter, sortBy,showSelectedMovieDetails}) {
 
     const getMovies = async () => {
         console.log(filter);
+        console.log(searchQuery);
         let response;
         const baseParams = new URLSearchParams({
             sortOrder: "desc",
@@ -44,13 +46,14 @@ function MovieList({searchQuery, filter, sortBy,showSelectedMovieDetails}) {
                 <div className="row mb-4" key={rowIndex}>
                     {row.map((movie) => (
                         <div className="col" key={movie.id}>
+                            <NavLink to={`/${movie.id}`}>
                             <img
                                 id="movie-image-in-list"
                                 src={movie.poster_path}
                                 alt={movie.title}
-                                onClick={() => handleMovieClick(movie)}
                                 className="img-fluid rounded shadow-sm"
                             />
+                            </NavLink>
                         </div>
                     ))}
                 </div>

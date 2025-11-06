@@ -16,6 +16,7 @@ function EditMovieModal({ movieToEdit, handleCloseModal }) {
 
     // Sync form fields whenever movieToEdit changes
     useEffect(() => {
+        console.log("Movie to Edit:", movieToEdit);
         if (movieToEdit) {
             setMovieTitle(movieToEdit.title || "");
             setMovieReleaseDate(movieToEdit.release_date || "");

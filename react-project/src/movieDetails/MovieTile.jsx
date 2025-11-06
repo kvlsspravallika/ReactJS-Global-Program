@@ -5,14 +5,24 @@ import {createPortal} from "react-dom";
 import EditMovieModal from "../modal/EditMovieModal.jsx";
 import MovieFilterControls from "../filter-bar/MovieFilterControls.jsx";
 import DeleteMovieModal from "../modal/DeleteMovieModal.jsx";
+import { useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
-function MovieTile({selectedMovie, setShowHeaderToTrue}) {
+function MovieTile() {
+
+    const selectedMovie = useLoaderData();
+    const navigate = useNavigate();
 
     const[showEditMovieModal, setShowEditMovieModal] = React.useState(false);
     const[showDeleteMovieModal, setShowDeleteMovieModal] = React.useState(false);
 
+    const handleEditClick = () => {
+        setShowEditMovieModal(true);
+        navigate("/edit/" + selectedMovie.id);
+    }
+
     const handleHomeClick = () => {
-        setShowHeaderToTrue();
+        navigate('/');
     }
     return (
         <header className="header d-flex flex-column justify-content-center
