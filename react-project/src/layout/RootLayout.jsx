@@ -1,60 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
-import Header from '../header/Header.jsx';
 import Footer from '../footer/Footer.jsx';
 import MovieFilterControls from '../filter-bar/MovieFilterControls.jsx';
 import MovieList from '../movieDetails/MovieList.jsx';
+
 function RootLayout() {
+  const [genres] = useState(["All", "Documentary", "Comedy", "Horror", "Crime"]);
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("release_date");
 
-    const [genres] = useState(["All", "Documentary", "Comedy", "Horror", "Crime"]);
-        const [selectedGenre, setSelectedGenre] = useState("");
-        const [showHeader, setShowHeader] = useState(true);
-        const [selectedMovie, setSelectedMovie] = useState(null);
-        const [searchQuery, setSearchQuery] = useState("");
-        const[sortBy, setSortBy] = useState("release_date");
+  // Handlers
+  const handleGenreSelect = (genre) => setSelectedGenre(genre);
+  const handleSelectMovie = (movie) => setSelectedMovie(movie);
+  const handleSearchQuery = (query) => setSearchQuery(query);
+  const handleSortChange = (criterion) => setSortBy(criterion);
 
-        // Event handler
-        const handleGenreSelect = (genre) => {
-            console.log("Selected Genre:", genre);
-            setSelectedGenre(genre);
-        };
+  return (
+    <div>
+      {/* Pass the search handler to the Header through Outlet context */}
+      <Outlet context={{ handleSearchQuery }} />
 
-        const handleShowSelectedMovieTile = (movie) => {
-            console.log("Selected Movie:", movie);
-            setShowHeader(false);
-            setSelectedMovie(movie);
-        }
+      <MovieFilterControls
+        genres={genres}
+        selectedGenre={selectedGenre}
+        handleSortBy={handleSortChange}
+        onGenreSelect={handleGenreSelect}
+      />
 
-        const searchByQuery = (query) => {
-            console.log("Search Query from App:", query);
-            setSearchQuery(query);
-        }
+      <MovieList
+        searchQuery={searchQuery}
+        filter={selectedGenre === "All" ? "" : selectedGenre}
+        sortBy={sortBy}
+        showSelectedMovieDetails={handleSelectMovie}
+      />
 
-        const sortByCriterion = (criterion) => {
-            console.log("Sort By Criterion:", criterion);
-            setSortBy(criterion);
-            console.log("Sort by Criterion:", criterion);
-        }
-
-
-    return (
-        <div>
-        <Outlet context={{ searchByQuery }}/>
-         <MovieFilterControls
-                        genres={genres}
-                        selectedGenre={selectedGenre}
-                        handleSortBy = {sortByCriterion}
-                        onGenreSelect={handleGenreSelect}
-
-                    />
-         <MovieList
-                        searchQuery = {searchQuery}
-                        filter = {selectedGenre == "All" ? "" : selectedGenre}
-                        sortBy = {sortBy}
-                        showSelectedMovieDetails = {handleShowSelectedMovieTile}/>
-         <Footer />
-        </div>
-    )
+      <Footer />
+    </div>
+  );
 }
+
 export default RootLayout;
