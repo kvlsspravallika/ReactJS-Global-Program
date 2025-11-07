@@ -6,7 +6,7 @@ import AddMovieModal from "../modal/AddMovieModal.jsx";
 import { useOutletContext } from "react-router-dom";
 
 function Header() {
-  const { handleSearchQuery } = useOutletContext(); // renamed context var
+  const { handleSearchQuery, query } = useOutletContext(); // query from URL
   const [showModal, setShowModal] = React.useState(false);
 
   return (
@@ -20,10 +20,13 @@ function Header() {
 
       <h1 className="find-your-movie">FIND YOUR MOVIE</h1>
 
-      <div className="header-content text-center search-bar" id="add-movie-modal-placement">
+      <div
+        className="header-content text-center search-bar"
+        id="add-movie-modal-placement"
+      >
         <SearchBar
-          initialQuery="What do you want to search?"
-          onSearch={handleSearchQuery}
+          initialQuery={query} // prefill from URL
+          onSearch={handleSearchQuery} // update URL on submit
         />
       </div>
 
