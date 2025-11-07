@@ -3,8 +3,12 @@ import "./Header.css";
 import SearchBar from "./SearchBar.jsx";
 import {createPortal} from "react-dom";
 import AddMovieModal from "../modal/AddMovieModal.jsx";
+import { useOutletContext } from 'react-router-dom';
 
-function Header({handleSearchResult}) {
+function Header() {
+
+    const { searchByQuery } = useOutletContext();
+
     const [showModal, setShowModal] = React.useState(false);
 
     return (
@@ -22,7 +26,7 @@ function Header({handleSearchResult}) {
                 <div className="header-content text-center search-bar" id="add-movie-modal-placement">
                     <SearchBar
                         intialQuery="What do you want to search?"
-                        onSearch={handleSearchResult}
+                        onSearch={searchByQuery}
                     />
                 </div>
 

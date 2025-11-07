@@ -40,7 +40,7 @@ function RootLayout() {
 
     return (
         <div>
-        <Outlet />
+        <Outlet context={{ searchByQuery }}/>
          <MovieFilterControls
                         genres={genres}
                         selectedGenre={selectedGenre}
