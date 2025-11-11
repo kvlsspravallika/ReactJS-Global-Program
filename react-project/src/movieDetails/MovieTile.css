@@ -1,0 +1,19 @@
+.add-movie-buttons{
+    height: 4rem;
+    width: 10rem;
+    left: 31.76%;
+    right: 31.33%;
+    top: calc(50% - 24px/2 + 1.5px);
+
+    font-family: 'Montserrat', system-ui;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: white;
+    background-color: lightcoral;
+    margin: 50px;
+}
