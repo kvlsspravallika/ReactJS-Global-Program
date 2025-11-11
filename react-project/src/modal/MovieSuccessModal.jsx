@@ -1,9 +1,13 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-function MovieSuccessModal({handleCloseModal}) {
+function MovieSuccessModal() {
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
-    const handleClose = () => setShow(false);
+    const handleCloseModal = () => {
+        navigate('/');
+    }
 
     return (
         <div className="modal fade show d-block" tabIndex="-1" aria-modal="true" role="dialog">

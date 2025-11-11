@@ -3,11 +3,17 @@ import "./Header.css";
 import SearchBar from "./SearchBar.jsx";
 import { createPortal } from "react-dom";
 import AddMovieModal from "../modal/AddMovieModal.jsx";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 
-function Header() {
+function Header({handleAddMovieClose}) {
   const { handleSearchQuery, query } = useOutletContext(); // query from URL
   const [showModal, setShowModal] = React.useState(false);
+  const navigate = useNavigate();
+
+  const handleAddMovie = () => {
+    setShowModal(true);
+    navigate('/add');
+  }
 
   return (
     <header className="header d-flex flex-column justify-content-center align-items-center text-white">
@@ -31,10 +37,10 @@ function Header() {
       </div>
 
       <div className="brand">
-        <button onClick={() => setShowModal(true)}>+ ADD MOVIE</button>
+        <button onClick={handleAddMovie}>+ ADD MOVIE</button>
         {showModal &&
           createPortal(
-            <AddMovieModal handleCloseModal={() => setShowModal(false)} />,
+            <AddMovieModal onClose={() => setShowModal(false)} />,
             document.getElementById("add-movie-modal-placement")
           )}
       </div>

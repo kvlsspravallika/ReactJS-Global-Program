@@ -2,8 +2,11 @@ import './AddMovieModal.css'
 import React, {useState} from "react";
 import {createPortal} from "react-dom";
 import MovieSuccessModal from "./MovieSuccessModal.jsx";
-function AddMovieModal({handleCloseModal, initialValues = {}}) {
+import {useNavigate} from "react-router-dom";
+function AddMovieModal() {
 
+    const navigate = useNavigate();
+    const initialValues = {};
     const [movieTitle, setMovieTitle] = useState(initialValues.title || '');
     const [movieReleaseDate, setMovieReleaseDate] = useState(initialValues.release_date || '');
     const [moviePosterPath, setMoviePosterPath] = useState(initialValues.poster_path || '');
@@ -17,6 +20,10 @@ function AddMovieModal({handleCloseModal, initialValues = {}}) {
     const handleGenreChange = (event) => {
         const selected = Array.from(event.target.selectedOptions, option => option.value)
         setSelectedGenres(selected);
+    }
+
+   const handleClose = () => {
+        navigate('/');
     }
 
     const handleReset = () => {
@@ -52,7 +59,6 @@ function AddMovieModal({handleCloseModal, initialValues = {}}) {
         .then(data => {
             console.log('Success:', data);
             setMovieAddedSuccessfully(true);
-            window.location.reload();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -128,10 +134,10 @@ function AddMovieModal({handleCloseModal, initialValues = {}}) {
                     <button onClick={handleReset} className="add-movie-buttons">RESET</button>
                     <button onClick={handleSubmit} className="add-movie-buttons" >SUBMIT</button>
                     {movieAddedSuccessfully && createPortal(
-                    <MovieSuccessModal handleCloseModal={() => setMovieAddedSuccessfully(false)} />,
+                    <MovieSuccessModal/>,
                     document.getElementById("add-movie-modal")
                     )}
-                    <button onClick={handleCloseModal} className="add-movie-buttons" >CLOSE</button>
+                    <button onClick={handleClose} className="add-movie-buttons" >CLOSE</button>
                 </div>
             </div>
         </div>
