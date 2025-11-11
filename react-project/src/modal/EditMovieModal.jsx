@@ -1,189 +1,232 @@
-import React, { useEffect, useState } from "react";
-import './EditMovieModal.css';
-import { useNavigate,useLoaderData } from "react-router-dom";
+import React, { useEffect } from "react";
+import "./EditMovieModal.css";
+import { useNavigate, useLoaderData } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function EditMovieModal() {
-    const [movieTitle, setMovieTitle] = useState("");
-    const [movieReleaseDate, setMovieReleaseDate] = useState("");
-    const [moviePosterPath, setMoviePosterPath] = useState("");
-    const [movieRating, setMovieRating] = useState("");
-    const [movieRunTime, setMovieRunTime] = useState("");
-    const [overview, setOverview] = useState("");
-    const [selectedGenres, setSelectedGenres] = useState([]);
-    const [id, setId] = useState(null);
-    const [movieUpdatedSuccessfully, setMovieUpdatedSuccessfully] = useState(false);
+  const urlToEditMovie = "http://localhost:4000/movies";
+  const navigate = useNavigate();
+  const movieToEdit = useLoaderData();
 
-    const urlToEditMovie = "http://localhost:4000/movies";
-    const navigate = useNavigate();
-    const movieToEdit = useLoaderData();
+  // Initialize form with default values
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm({
+    defaultValues: {
+      title: "",
+      release_date: "",
+      poster_path: "",
+      vote_average: "",
+      runtime: "",
+      overview: "",
+      genres: [],
+      id: null,
+    },
+  });
 
-    const handleClose = () => {
-        navigate('/');
+  // When movieToEdit is loaded, populate form fields
+  useEffect(() => {
+    if (movieToEdit) {
+      reset({
+        title: movieToEdit.title || "",
+        release_date: movieToEdit.release_date || "",
+        poster_path: movieToEdit.poster_path || "",
+        vote_average: movieToEdit.vote_average || "",
+        runtime: movieToEdit.runtime || "",
+        overview: movieToEdit.overview || "",
+        genres: movieToEdit.genres || [],
+        id: movieToEdit.id || null,
+      });
+    }
+  }, [movieToEdit, reset]);
+
+  const handleClose = () => navigate("/");
+
+  const onSubmit = async (data) => {
+    const movieToUpdate = {
+      ...data,
+      vote_average: parseInt(data.vote_average, 10),
+      runtime: parseInt(data.runtime, 10),
     };
 
-    // Sync form fields whenever movieToEdit changes
-    useEffect(() => {
-        console.log("Movie to Edit:", movieToEdit);
-        if (movieToEdit) {
-            setMovieTitle(movieToEdit.title || "");
-            setMovieReleaseDate(movieToEdit.release_date || "");
-            setMoviePosterPath(movieToEdit.poster_path || "");
-            setMovieRating(movieToEdit.vote_average || "");
-            setMovieRunTime(movieToEdit.runtime || "");
-            setOverview(movieToEdit.overview || "");
-            setSelectedGenres(movieToEdit.genres || []);
-            setId(movieToEdit.id || null);
-        }
-    }, [movieToEdit]);
+    try {
+      const res = await fetch(`${urlToEditMovie}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(movieToUpdate),
+      });
+      const updatedMovie = await res.json();
+      console.log("Updated:", updatedMovie);
+      navigate(`/${movieToUpdate.id}`);
+    } catch (error) {
+      console.error("Error updating movie:", error);
+    }
+  };
 
-    const handleGenreChange = (event) => {
-        const selected = Array.from(event.target.selectedOptions, option => option.value);
-        setSelectedGenres(selected);
-    };
+  const handleReset = () => reset();
 
-    const handleReset = () => {
-        setMovieTitle("");
-        setMovieReleaseDate("");
-        setMoviePosterPath("");
-        setMovieRating("");
-        setMovieRunTime("");
-        setOverview("");
-        setSelectedGenres([]);
-    };
+  return (
+    <div className="modal-overlay" id="add-movie-modal">
+      <div className="modal-content">
+        <h1 id="add-movie-header">EDIT MOVIE</h1>
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const movieToUpdate = {
-            title: movieTitle,
-            release_date: movieReleaseDate,
-            poster_path: moviePosterPath,
-            vote_average: parseInt(movieRating, 10),
-            runtime: parseInt(movieRunTime, 10),
-            overview: overview,
-            genres: selectedGenres,
-            id: id
-        };
-        console.log(movieToUpdate);
-        console.log(`${urlToEditMovie}/${id}`)
-
-        try {
-            const res = await fetch(`${urlToEditMovie}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(movieToUpdate)
-            });
-            const data = await res.json();
-            console.log('Success:', data);
-            setMovieUpdatedSuccessfully(true);
-            navigate(`/${id}`);
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
-    return (
-        <div className="modal-overlay" id="add-movie-modal">
-            <div className="modal-content">
-                <h1 id="add-movie-header">EDIT MOVIE</h1>
-                <form>
-                    {/* Title & Release Date */}
-                    <div className="row mb-3">
-                        <div className="col-md-6">
-                            <label htmlFor="title" className="form-label">TITLE</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="title"
-                                placeholder="Enter Title"
-                                value={movieTitle}
-                                onChange={(e) => setMovieTitle(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-md-6">
-                            <label htmlFor="release-date" className="form-label">RELEASE DATE</label>
-                            <input
-                                type="date"
-                                className="form-control"
-                                id="release-date"
-                                value={movieReleaseDate}
-                                onChange={(e) => setMovieReleaseDate(e.target.value)}
-                            />
-                        </div>
-                    </div>
-
-                    {/* Poster & Rating */}
-                    <div className="row mb-3">
-                        <div className="col-md-6">
-                            <label htmlFor="movie-url" className="form-label">MOVIE POSTER PATH</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="movie-url"
-                                value={moviePosterPath}
-                                onChange={(e) => setMoviePosterPath(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-md-6">
-                            <label htmlFor="rating" className="form-label">RATING</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                id="rating"
-                                value={movieRating}
-                                onChange={(e) => setMovieRating(e.target.value)}
-                            />
-                        </div>
-                    </div>
-
-                    {/* Genre & Runtime */}
-                    <div className="row mb-3">
-                        <div className="col-md-6">
-                            <label htmlFor="genre" className="form-label">GENRE</label>
-                            <select
-                                id="genre"
-                                className="form-select form-select-lg mb-3"
-                                multiple
-                                value={selectedGenres}
-                                onChange={handleGenreChange}
-                            >
-                                <option value="crime">Crime</option>
-                                <option value="documentary">Documentary</option>
-                                <option value="horror">Horror</option>
-                                <option value="comedy">Comedy</option>
-                            </select>
-                        </div>
-                        <div className="col-md-6">
-                            <label htmlFor="runtime" className="form-label">RUNTIME</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                id="runtime"
-                                value={movieRunTime}
-                                onChange={(e) => setMovieRunTime(e.target.value)}
-                            />
-                        </div>
-                    </div>
-
-                    {/* Overview */}
-                    <div className="overview-section">
-                        <label htmlFor="text-area" className="form-label">OVERVIEW</label>
-                        <textarea
-                            className="form-control"
-                            id="text-area"
-                            value={overview}
-                            onChange={(e) => setOverview(e.target.value)}
-                        ></textarea>
-                    </div>
-                </form>
-
-                <div className="d-flex modal-buttons">
-                    <button type="button" onClick={handleReset} className="add-movie-buttons">RESET</button>
-                    <button type="button" onClick={handleSubmit} className="add-movie-buttons">SUBMIT</button>
-                    <button type="button" onClick={handleClose} className="add-movie-buttons">CLOSE</button>
-                </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Title & Release Date */}
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <label htmlFor="title" className="form-label">
+                TITLE
+              </label>
+              <input
+                type="text"
+                id="title"
+                className="form-control"
+                placeholder="Enter Title"
+                {...register("title", { required: "Title is required" })}
+              />
+              {errors.title && (
+                <p className="text-danger">{errors.title.message}</p>
+              )}
             </div>
-        </div>
-    );
+            <div className="col-md-6">
+              <label htmlFor="release-date" className="form-label">
+                RELEASE DATE
+              </label>
+              <input
+                type="date"
+                id="release-date"
+                className="form-control"
+                {...register("release_date", {
+                  required: "Release date is required",
+                })}
+              />
+              {errors.release_date && (
+                <p className="text-danger">{errors.release_date.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Poster & Rating */}
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <label htmlFor="poster-path" className="form-label">
+                MOVIE POSTER PATH
+              </label>
+              <input
+                type="text"
+                id="poster-path"
+                className="form-control"
+                {...register("poster_path", {
+                  required: "Poster path is required",
+                })}
+              />
+              {errors.poster_path && (
+                <p className="text-danger">{errors.poster_path.message}</p>
+              )}
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="rating" className="form-label">
+                RATING
+              </label>
+              <input
+                type="number"
+                id="rating"
+                className="form-control"
+                {...register("vote_average", {
+                  required: "Rating is required",
+                  min: { value: 0, message: "Rating must be >= 0" },
+                  max: { value: 10, message: "Rating must be <= 10" },
+                })}
+              />
+              {errors.vote_average && (
+                <p className="text-danger">{errors.vote_average.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Genre & Runtime */}
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <label htmlFor="genre" className="form-label">
+                GENRE
+              </label>
+              <select
+                id="genre"
+                className="form-select form-select-lg mb-3"
+                multiple
+                {...register("genres", { required: "Select at least one genre" })}
+              >
+                <option value="crime">Crime</option>
+                <option value="documentary">Documentary</option>
+                <option value="horror">Horror</option>
+                <option value="comedy">Comedy</option>
+              </select>
+              {errors.genres && (
+                <p className="text-danger">{errors.genres.message}</p>
+              )}
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="runtime" className="form-label">
+                RUNTIME
+              </label>
+              <input
+                type="number"
+                id="runtime"
+                className="form-control"
+                {...register("runtime", {
+                  required: "Runtime is required",
+                  min: { value: 1, message: "Runtime must be positive" },
+                })}
+              />
+              {errors.runtime && (
+                <p className="text-danger">{errors.runtime.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Overview */}
+          <div className="overview-section">
+            <label htmlFor="text-area" className="form-label">
+              OVERVIEW
+            </label>
+            <textarea
+              id="text-area"
+              className="form-control"
+              {...register("overview", {
+                required: "Overview is required",
+              })}
+            ></textarea>
+            {errors.overview && (
+              <p className="text-danger">{errors.overview.message}</p>
+            )}
+          </div>
+
+          <div className="d-flex modal-buttons">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="add-movie-buttons"
+            >
+              RESET
+            </button>
+            <button type="submit" className="add-movie-buttons">
+              SUBMIT
+            </button>
+            <button
+              type="button"
+              onClick={handleClose}
+              className="add-movie-buttons"
+            >
+              CLOSE
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default EditMovieModal;
