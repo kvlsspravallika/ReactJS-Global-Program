@@ -18,7 +18,7 @@ function MovieTile() {
 
     const handleEditClick = () => {
         setShowEditMovieModal(true);
-        navigate("/edit/" + selectedMovie.id);
+        navigate("edit/");
     }
 
     const handleHomeClick = () => {
@@ -71,7 +71,7 @@ function MovieTile() {
                                 {selectedMovie.overview}
                             </p>
                             <button className="add-movie-buttons"
-                            onClick={() => setShowEditMovieModal(true)}>
+                            onClick={handleEditClick}>
                                 EDIT</button>
                             {
                                 showEditMovieModal && createPortal(<EditMovieModal movieToEdit={selectedMovie}

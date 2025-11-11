@@ -6,6 +6,7 @@ import Header from "./header/Header.jsx";
 import MovieTile from "./movieDetails/MovieTile.jsx";
 import { movieLoader } from "./Loaders/movieLoader.js";
 import AddMovieModal from "./modal/AddMovieModal.jsx";
+import EditMovieModal from "./modal/EditMovieModal.jsx";
 
 function App() {
   const router = createBrowserRouter(
@@ -14,6 +15,7 @@ function App() {
         <Route index element={<Header />} />
         <Route path=":movieId" element={<MovieTile />} loader={movieLoader} />
         <Route path="/add" element={<AddMovieModal />}/>
+        <Route path=":movieId/edit" element={<EditMovieModal />} loader={movieLoader}/>
       </Route>
     )
   );

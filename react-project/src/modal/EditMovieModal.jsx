@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import './EditMovieModal.css';
+import { useNavigate,useLoaderData } from "react-router-dom";
 
-function EditMovieModal({ movieToEdit, handleCloseModal }) {
+function EditMovieModal() {
     const [movieTitle, setMovieTitle] = useState("");
     const [movieReleaseDate, setMovieReleaseDate] = useState("");
     const [moviePosterPath, setMoviePosterPath] = useState("");
@@ -13,6 +14,12 @@ function EditMovieModal({ movieToEdit, handleCloseModal }) {
     const [movieUpdatedSuccessfully, setMovieUpdatedSuccessfully] = useState(false);
 
     const urlToEditMovie = "http://localhost:4000/movies";
+    const navigate = useNavigate();
+    const movieToEdit = useLoaderData();
+
+    const handleClose = () => {
+        navigate('/');
+    };
 
     // Sync form fields whenever movieToEdit changes
     useEffect(() => {
@@ -68,7 +75,7 @@ function EditMovieModal({ movieToEdit, handleCloseModal }) {
             const data = await res.json();
             console.log('Success:', data);
             setMovieUpdatedSuccessfully(true);
-            window.location.reload();
+            navigate(`/${id}`);
         } catch (error) {
             console.error('Error:', error);
         }
@@ -172,7 +179,7 @@ function EditMovieModal({ movieToEdit, handleCloseModal }) {
                 <div className="d-flex modal-buttons">
                     <button type="button" onClick={handleReset} className="add-movie-buttons">RESET</button>
                     <button type="button" onClick={handleSubmit} className="add-movie-buttons">SUBMIT</button>
-                    <button type="button" onClick={handleCloseModal} className="add-movie-buttons">CLOSE</button>
+                    <button type="button" onClick={handleClose} className="add-movie-buttons">CLOSE</button>
                 </div>
             </div>
         </div>
